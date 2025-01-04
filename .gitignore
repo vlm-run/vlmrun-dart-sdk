@@ -1,0 +1,15 @@
+# Dart packages
+.dart_tool/
+.packages
+
+# Build outputs
+build/
+
+# Pub lock file
+pubspec.lock
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
