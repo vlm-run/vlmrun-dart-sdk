@@ -12,9 +12,9 @@ import 'resources/web.dart';
 import 'resources/response.dart';
 
 /// The main client for interacting with the Vlm API.
-class Vlmrun {
+class VlmRun {
   /// Creates a new Vlm client.
-  Vlmrun({
+  VlmRun({
     required String bearerToken,
     String baseUrl = 'https://api.vlm.dev',
     Duration timeout = const Duration(seconds: 30),

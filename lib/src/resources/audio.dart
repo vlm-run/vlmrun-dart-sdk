@@ -9,7 +9,7 @@ import '../utils/http_utils.dart';
 class AudioResource {
   AudioResource(this._client);
 
-  final Vlmrun _client;
+  final VlmRun _client;
 
   /// Generate structured prediction for the given audio.
   Future<PredictionResponse> generate({

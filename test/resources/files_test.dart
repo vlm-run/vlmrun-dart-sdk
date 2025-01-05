@@ -6,11 +6,11 @@ import '../helpers.dart';
 
 void main() {
   late MockHttpClient mockClient;
-  late Vlmrun client;
+  late VlmRun client;
 
   setUp(() {
     mockClient = MockHttpClient();
-    client = Vlmrun(
+    client = VlmRun(
       bearerToken: 'test-token',
       httpClient: mockClient,
     );

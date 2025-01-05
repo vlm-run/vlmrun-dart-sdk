@@ -8,7 +8,7 @@ import '../types/schema.dart';
 class SchemaResource {
   SchemaResource(this._client);
 
-  final Vlmrun _client;
+  final VlmRun _client;
 
   /// Generate a schema prediction.
   Future<PredictionResponse> generate({

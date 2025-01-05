@@ -37,7 +37,7 @@ import 'dart:io';
 import 'package:vlmrun/vlmrun.dart';
 
 Future<void> main() async {
-  final client = Vlmrun(
+  final client = VlmRun(
     bearerToken: Platform.environment['BEARER_TOKEN'] ?? '',
     baseUrl: 'https://dev.vlm.run',
   );

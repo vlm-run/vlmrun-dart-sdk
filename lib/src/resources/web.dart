@@ -9,7 +9,7 @@ import '../utils/http_utils.dart';
 class WebResource {
   WebResource(this._client);
 
-  final Vlmrun _client;
+  final VlmRun _client;
 
   /// Generate structured prediction for the given url.
   Future<PredictionResponse> generate({

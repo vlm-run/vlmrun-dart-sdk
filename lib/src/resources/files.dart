@@ -12,7 +12,7 @@ import '../utils/http_utils.dart';
 class FilesResource {
   FilesResource(this._client);
 
-  final Vlmrun _client;
+  final VlmRun _client;
 
   /// Create a file.
   Future<FileResponse> create({

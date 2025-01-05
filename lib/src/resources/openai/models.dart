@@ -8,7 +8,7 @@ import '../../types/error.dart';
 class ModelsResource {
   ModelsResource(this._client);
 
-  final Vlmrun _client;
+  final VlmRun _client;
 
   /// List all available models.
   Future<ModelList> list() async {

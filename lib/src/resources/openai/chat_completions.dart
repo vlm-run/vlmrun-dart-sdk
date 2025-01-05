@@ -8,7 +8,7 @@ import '../../types/error.dart';
 class ChatCompletionsResource {
   ChatCompletionsResource(this._client);
 
-  final Vlmrun _client;
+  final VlmRun _client;
 
   /// Create a chat completion.
   Future<ChatCompletion> create({

@@ -8,7 +8,7 @@ import '../types/model_info_response.dart';
 class ModelsResource {
   ModelsResource(this._client);
 
-  final Vlmrun _client;
+  final VlmRun _client;
 
   /// Get the list of supported models.
   Future<List<ModelInfoResponse>> list() async {

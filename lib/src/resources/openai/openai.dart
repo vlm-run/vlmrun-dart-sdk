@@ -6,7 +6,7 @@ import 'models.dart';
 class OpenAIResource {
   OpenAIResource(this._client);
 
-  final Vlmrun _client;
+  final VlmRun _client;
 
   /// Access to chat completion endpoints.
   late final chatCompletions = ChatCompletionsResource(_client);

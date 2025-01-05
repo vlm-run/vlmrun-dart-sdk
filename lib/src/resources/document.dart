@@ -9,7 +9,7 @@ import '../utils/http_utils.dart';
 class DocumentResource {
   DocumentResource(this._client);
 
-  final Vlmrun _client;
+  final VlmRun _client;
 
   /// Generate document.
   Future<PredictionResponse> generate({

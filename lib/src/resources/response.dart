@@ -8,7 +8,7 @@ import '../types/shared/prediction_response.dart';
 class ResponseResource {
   ResponseResource(this._client);
 
-  final Vlmrun _client;
+  final VlmRun _client;
 
   /// Get response JSON by request ID.
   Future<PredictionResponse> retrieve(String id) async {

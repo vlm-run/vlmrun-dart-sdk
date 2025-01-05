@@ -9,7 +9,7 @@ import '../utils/http_utils.dart';
 class ImageResource {
   ImageResource(this._client);
 
-  final Vlmrun _client;
+  final VlmRun _client;
 
   /// Generate an image.
   Future<PredictionResponse> generate({
