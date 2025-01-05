@@ -1,0 +1,51 @@
+name: Publish Dart Package
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [closed]
+  release:
+    types: [created]
+
+jobs:
+  build:
+    if: github.event.pull_request.merged == true || github.event_name == 'release'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Dart
+        uses: subosito/dart-action@v3
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Run tests
+        run: dart test
+
+      - name: Check if version changed
+        id: check_version_change
+        run: |
+          VERSION_CHANGED=$(git diff HEAD^ HEAD pubspec.yaml | grep '+version:')
+          if [ -n "$VERSION_CHANGED" ]; then
+            echo "Version change detected: $VERSION_CHANGED"
+            echo "SHOULD_PUBLISH=true" >> $GITHUB_ENV
+          else
+            echo "No version change detected in pubspec.yaml. Skipping publish."
+            echo "SHOULD_PUBLISH=false" >> $GITHUB_ENV
+          fi
+
+      - name: Dry run
+        if: env.SHOULD_PUBLISH == 'true'
+        run: dart pub publish --dry-run
+
+      - name: Publish package
+        if: env.SHOULD_PUBLISH == 'true'
+        run: dart pub publish --force
+        env:
+          PUB_DEV_TOKEN: ${{ secrets.PUB_DEV_TOKEN }}
