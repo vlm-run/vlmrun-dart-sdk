@@ -23,7 +23,7 @@ class Vlm {
   /// Creates a new Vlm client.
   Vlm({
     required String bearerToken,
-    String baseUrl = 'https://api.vlm.run/v1',
+    String baseUrl = 'https://api.vlm.run',
     Duration timeout = const Duration(seconds: 30),
     http.Client? httpClient,
   })  : _bearerToken = bearerToken,
