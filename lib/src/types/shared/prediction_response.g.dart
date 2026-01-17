@@ -13,6 +13,10 @@ PredictionResponse _$PredictionResponseFromJson(Map<String, dynamic> json) =>
       completedAt: json['completed_at'] as String?,
       response: json['response'] as Map<String, dynamic>?,
       status: json['status'] as String? ?? 'pending',
+      message: json['message'] as String?,
+      usage: json['usage'] == null
+          ? null
+          : CreditUsage.fromJson(json['usage'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$PredictionResponseToJson(PredictionResponse instance) =>
@@ -22,4 +26,6 @@ Map<String, dynamic> _$PredictionResponseToJson(PredictionResponse instance) =>
       'completed_at': instance.completedAt,
       'response': instance.response,
       'status': instance.status,
+      'message': instance.message,
+      'usage': instance.usage?.toJson(),
     };

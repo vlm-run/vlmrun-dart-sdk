@@ -10,13 +10,20 @@ import 'resources/document.dart';
 import 'resources/models.dart';
 import 'resources/web.dart';
 import 'resources/response.dart';
+import 'resources/predictions.dart';
+import 'resources/agent.dart';
+import 'resources/executions.dart';
+import 'resources/feedback.dart';
+import 'resources/hub.dart';
+import 'resources/domains.dart';
+import 'resources/video.dart';
 
 /// The main client for interacting with the Vlm API.
 class Vlm {
   /// Creates a new Vlm client.
   Vlm({
     required String bearerToken,
-    String baseUrl = 'https://api.vlm.dev',
+    String baseUrl = 'https://api.vlm.run/v1',
     Duration timeout = const Duration(seconds: 30),
     http.Client? httpClient,
   })  : _bearerToken = bearerToken,
@@ -56,6 +63,27 @@ class Vlm {
   /// Access to response-related endpoints.
   late final response = ResponseResource(this);
 
+  /// Access to prediction-related endpoints.
+  late final predictions = PredictionsResource(this);
+
+  /// Access to agent-related endpoints.
+  late final agent = AgentResource(this);
+
+  /// Access to execution-related endpoints.
+  late final executions = ExecutionsResource(this);
+
+  /// Access to feedback-related endpoints.
+  late final feedback = FeedbackResource(this);
+
+  /// Access to hub-related endpoints.
+  late final hub = HubResource(this);
+
+  /// Access to domain-related endpoints.
+  late final domains = DomainsResource(this);
+
+  /// Access to video-related endpoints.
+  late final video = VideoResource(this);
+
   /// Makes an HTTP request to the Vlm API.
   @internal
   Future<http.Response> request(
@@ -79,6 +107,11 @@ class Vlm {
       case 'POST':
         response = await _httpClient
             .post(url, headers: headers, body: body)
+            .timeout(_timeout);
+        break;
+      case 'DELETE':
+        response = await _httpClient
+            .delete(url, headers: headers)
             .timeout(_timeout);
         break;
       default:

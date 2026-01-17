@@ -10,7 +10,7 @@ ChatCompletion _$ChatCompletionFromJson(Map<String, dynamic> json) =>
     ChatCompletion(
       id: json['id'] as String,
       object: json['object'] as String? ?? 'chat.completion',
-      created: (json['created'] as num).toInt(),
+      created: json['created'] as int,
       model: json['model'] as String,
       choices: (json['choices'] as List<dynamic>)
           .map((e) => ChatCompletionChoice.fromJson(e as Map<String, dynamic>))
@@ -32,7 +32,7 @@ Map<String, dynamic> _$ChatCompletionToJson(ChatCompletion instance) =>
 ChatCompletionChoice _$ChatCompletionChoiceFromJson(
         Map<String, dynamic> json) =>
     ChatCompletionChoice(
-      index: (json['index'] as num).toInt(),
+      index: json['index'] as int,
       message: ChatMessage.fromJson(json['message'] as Map<String, dynamic>),
       finishReason: json['finish_reason'] as String,
     );
@@ -58,9 +58,9 @@ Map<String, dynamic> _$ChatMessageToJson(ChatMessage instance) =>
 
 ChatCompletionUsage _$ChatCompletionUsageFromJson(Map<String, dynamic> json) =>
     ChatCompletionUsage(
-      promptTokens: (json['prompt_tokens'] as num).toInt(),
-      completionTokens: (json['completion_tokens'] as num).toInt(),
-      totalTokens: (json['total_tokens'] as num).toInt(),
+      promptTokens: json['prompt_tokens'] as int,
+      completionTokens: json['completion_tokens'] as int,
+      totalTokens: json['total_tokens'] as int,
     );
 
 Map<String, dynamic> _$ChatCompletionUsageToJson(

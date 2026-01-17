@@ -7,7 +7,7 @@ part of 'error.dart';
 // **************************************************************************
 
 VlmError _$VlmErrorFromJson(Map<String, dynamic> json) => VlmError(
-      statusCode: (json['statusCode'] as num).toInt(),
+      statusCode: json['statusCode'] as int,
       details: json['details'] as Map<String, dynamic>,
     );
 

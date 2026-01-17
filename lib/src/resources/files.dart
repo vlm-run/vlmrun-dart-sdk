@@ -6,6 +6,7 @@ import 'package:path/path.dart' as path;
 
 import '../vlm_client.dart';
 import '../types/files.dart';
+import '../types/presigned_url.dart';
 import '../utils/http_utils.dart';
 
 /// Resource class for file-related endpoints.
@@ -89,8 +90,16 @@ class FilesResource {
         .toList();
   }
 
-  Future<FileResponse> retrieve(String fileId) async {
-    final response = await _client.request('GET', '/v1/files/$fileId');
+  Future<FileResponse> retrieve(String fileId, {bool? generatePublicUrl}) async {
+    var path = '/v1/files/$fileId';
+    if (generatePublicUrl != null) {
+      final uri = Uri.parse(path).replace(queryParameters: {
+        'generate_public_url': generatePublicUrl.toString(),
+      });
+      path = uri.toString();
+    }
+
+    final response = await _client.request('GET', path);
     final json = jsonDecode(response.body) as Map<String, dynamic>;
 
     if (!HttpUtils.isSuccessful(response.statusCode)) {
@@ -101,5 +110,48 @@ class FilesResource {
     }
 
     return FileResponse.fromJson(json);
+  }
+
+  /// Delete a file.
+  Future<void> delete(String fileId) async {
+    if (fileId.isEmpty) {
+      throw ArgumentError('Expected a non-empty value for `fileId`');
+    }
+
+    final response = await _client.request('DELETE', '/v1/files/$fileId');
+
+    if (!HttpUtils.isSuccessful(response.statusCode)) {
+      HttpUtils.handleErrorResponse(
+        response.statusCode,
+        jsonDecode(response.body) as Map<String, dynamic>,
+      );
+    }
+  }
+
+  /// Generate a presigned URL for file upload.
+  Future<PresignedUrlResponse> generatePresignedUrl({
+    required String filename,
+    String? purpose,
+  }) async {
+    final data = <String, dynamic>{
+      'filename': filename,
+    };
+    if (purpose != null) data['purpose'] = purpose;
+
+    final response = await _client.request(
+      'POST',
+      '/v1/files/presigned-url',
+      body: jsonEncode(data),
+    );
+
+    if (!HttpUtils.isSuccessful(response.statusCode)) {
+      HttpUtils.handleErrorResponse(
+        response.statusCode,
+        jsonDecode(response.body) as Map<String, dynamic>,
+      );
+    }
+
+    final json = jsonDecode(response.body) as Map<String, dynamic>;
+    return PresignedUrlResponse.fromJson(json);
   }
 }
