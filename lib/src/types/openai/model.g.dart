@@ -21,7 +21,7 @@ Map<String, dynamic> _$ModelListToJson(ModelList instance) => <String, dynamic>{
 Model _$ModelFromJson(Map<String, dynamic> json) => Model(
       id: json['id'] as String,
       object: json['object'] as String? ?? 'model',
-      created: (json['created'] as num).toInt(),
+      created: json['created'] as int,
       ownedBy: json['owned_by'] as String,
       permission: (json['permission'] as List<dynamic>?)
           ?.map((e) => ModelPermission.fromJson(e as Map<String, dynamic>))
@@ -55,7 +55,7 @@ ModelPermission _$ModelPermissionFromJson(Map<String, dynamic> json) =>
     ModelPermission(
       id: json['id'] as String,
       object: json['object'] as String? ?? 'model_permission',
-      created: (json['created'] as num).toInt(),
+      created: json['created'] as int,
       allowCreateEngine: json['allow_create_engine'] as bool,
       allowSampling: json['allow_sampling'] as bool,
       allowLogprobs: json['allow_logprobs'] as bool,

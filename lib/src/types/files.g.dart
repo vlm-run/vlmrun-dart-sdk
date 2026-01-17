@@ -29,7 +29,7 @@ Map<String, dynamic> _$FileRequestToJson(FileRequest instance) {
 FileResponse _$FileResponseFromJson(Map<String, dynamic> json) => FileResponse(
       id: json['id'] as String,
       object: json['object'] as String,
-      bytes: (json['bytes'] as num).toInt(),
+      bytes: json['bytes'] as int,
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),
@@ -59,7 +59,7 @@ Map<String, dynamic> _$FileResponseToJson(FileResponse instance) {
 FileListRequest _$FileListRequestFromJson(Map<String, dynamic> json) =>
     FileListRequest(
       purpose: json['purpose'] as String?,
-      limit: (json['limit'] as num?)?.toInt(),
+      limit: json['limit'] as int?,
       after: json['after'] as String?,
       order: json['order'] as String?,
     );

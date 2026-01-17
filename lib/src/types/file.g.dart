@@ -8,7 +8,7 @@ part of 'file.dart';
 
 StoreFileResponse _$StoreFileResponseFromJson(Map<String, dynamic> json) =>
     StoreFileResponse(
-      bytes: (json['bytes'] as num).toInt(),
+      bytes: json['bytes'] as int,
       filename: json['filename'] as String,
       purpose: json['purpose'] as String,
       id: json['id'] as String?,

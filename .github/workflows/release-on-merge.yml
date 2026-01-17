@@ -1,0 +1,102 @@
+name: Release on Merge
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  release:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Dart
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: "3.6.0"
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Check for version change
+        id: check_version
+        run: |
+          PREV_VERSION=$(git show HEAD^:pubspec.yaml | grep '^version:' | sed 's/version: //')
+          NEW_VERSION=$(grep '^version:' pubspec.yaml | sed 's/version: //')
+          echo "Previous version: $PREV_VERSION"
+          echo "New version: $NEW_VERSION"
+          echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
+          if [ "$PREV_VERSION" != "$NEW_VERSION" ]; then
+            echo "Version has changed to $NEW_VERSION"
+            echo "VERSION_CHANGED=true" >> $GITHUB_ENV
+            echo "RELEASE_TAG=v$NEW_VERSION" >> $GITHUB_ENV
+          else
+            echo "No version change detected."
+            echo "VERSION_CHANGED=false" >> $GITHUB_ENV
+          fi
+
+      - name: Create GitHub Release
+        if: env.VERSION_CHANGED == 'true'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          name: Release ${{ env.RELEASE_TAG }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to pub.dev
+        if: env.VERSION_CHANGED == 'true'
+        run: |
+          dart pub publish --force
+        env:
+          PUB_TOKEN: ${{ secrets.PUB_TOKEN }}
+
+      - name: Notify Slack on Success
+        if: success() && env.VERSION_CHANGED == 'true'
+        uses: slackapi/slack-github-action@v2.0.0
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":large_green_circle: :package: *vlmrun-dart-sdk ${{ env.RELEASE_TAG }} Published to pub.dev*\n\n*Version:* `${{ env.RELEASE_TAG }}`\n*Commit:* <${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}|${{ env.SHORT_SHA }}>"
+                  }
+                }
+              ]
+            }
+
+      - name: Notify Slack on Failure
+        if: failure() && env.VERSION_CHANGED == 'true'
+        uses: slackapi/slack-github-action@v2.0.0
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":red_circle: :package: *vlmrun-dart-sdk Publish Failed*\n\n*Tag:* `${{ env.RELEASE_TAG }}`\n*Workflow:* <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>"
+                  }
+                }
+              ]
+            }

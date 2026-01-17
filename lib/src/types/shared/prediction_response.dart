@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import '../credit_usage.dart';
 
 part 'prediction_response.g.dart';
 
@@ -10,6 +11,8 @@ class PredictionResponse {
     this.completedAt,
     this.response,
     this.status = 'pending',
+    this.message,
+    this.usage,
   });
 
   /// Unique identifier of the response.
@@ -28,6 +31,12 @@ class PredictionResponse {
 
   /// The status of the job.
   final String status;
+
+  /// Optional message (e.g., error message).
+  final String? message;
+
+  /// Credit usage information.
+  final CreditUsage? usage;
 
   factory PredictionResponse.fromJson(Map<String, dynamic> json) =>
       _$PredictionResponseFromJson(json);
