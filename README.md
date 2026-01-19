@@ -6,16 +6,16 @@
 <p align="center"><a href="https://docs.vlm.run"><b>Website</b></a> | <a href="https://app.vlm.run/"><b>Platform</b></a> | <a href="https://docs.vlm.run/"><b>Docs</b></a> | <a href="https://docs.vlm.run/blog"><b>Blog</b></a> | <a href="https://discord.gg/AMApC2UzVY"><b>Discord</b></a>
 </p>
 <p align="center">
-<a href="https://pub.dev/packages/vlm"><img alt="pub.dev Version" src="https://img.shields.io/pub/v/vlm.svg"></a>
-<a href="https://pub.dev/packages/vlm"><img alt="pub.dev Likes" src="https://img.shields.io/pub/likes/vlm"></a>
-<a href="https://pub.dev/packages/vlm"><img alt="pub.dev Points" src="https://img.shields.io/pub/points/vlm"></a><br>
+<a href="https://pub.dev/packages/vlmrun"><img alt="pub.dev Version" src="https://img.shields.io/pub/v/vlmrun.svg"></a>
+<a href="https://pub.dev/packages/vlmrun"><img alt="pub.dev Likes" src="https://img.shields.io/pub/likes/vlmrun"></a>
+<a href="https://pub.dev/packages/vlmrun"><img alt="pub.dev Points" src="https://img.shields.io/pub/points/vlmrun"></a><br>
 <a href="https://github.com/vlm-run/vlmrun-dart-sdk/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-blue"></a>
 <a href="https://discord.gg/AMApC2UzVY"><img alt="Discord" src="https://img.shields.io/badge/discord-chat-purple?color=%235765F2&label=discord&logo=discord"></a>
 <a href="https://twitter.com/vlmrun"><img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/vlmrun.svg?style=social&logo=twitter"></a>
 </p>
 </div>
 
-The [VLM Run Dart SDK](https://pub.dev/packages/vlm) is the official Dart client for [VLM Run API platform](https://docs.vlm.run), providing a convenient way to interact with our REST APIs from Dart and Flutter applications.
+The [VLM Run Dart SDK](https://pub.dev/packages/vlmrun) is the official Dart client for [VLM Run API platform](https://docs.vlm.run), providing a convenient way to interact with our REST APIs from Dart and Flutter applications.
 
 ## Getting Started
 
@@ -25,7 +25,7 @@ Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  vlm: ^0.1.0
+  vlmrun: ^0.1.0
 ```
 
 Then run:
@@ -39,11 +39,11 @@ dart pub get
 ### Image Predictions
 
 ```dart
-import 'package:vlm/vlm.dart';
+import 'package:vlmrun/vlmrun.dart';
 
 void main() async {
   // Initialize the client
-  final client = Vlm(bearerToken: 'your-api-key');
+  final client = VlmRun(bearerToken: 'your-api-key');
 
   // Process an image (using image url)
   final imageUrl = 'https://storage.googleapis.com/vlm-data-public-prod/hub/examples/document.invoice/invoice_1.jpg';
@@ -65,11 +65,11 @@ void main() async {
 ### Document Predictions
 
 ```dart
-import 'package:vlm/vlm.dart';
+import 'package:vlmrun/vlmrun.dart';
 
 void main() async {
   // Initialize the client
-  final client = Vlm(bearerToken: 'your-api-key');
+  final client = VlmRun(bearerToken: 'your-api-key');
 
   // Upload a document
   final file = await client.files.create(
@@ -99,11 +99,11 @@ void main() async {
 ### Audio Predictions
 
 ```dart
-import 'package:vlm/vlm.dart';
+import 'package:vlmrun/vlmrun.dart';
 
 void main() async {
   // Initialize the client
-  final client = Vlm(bearerToken: 'your-api-key');
+  final client = VlmRun(bearerToken: 'your-api-key');
 
   // Upload an audio file
   final file = await client.files.create(
@@ -124,11 +124,11 @@ void main() async {
 ### Web Predictions
 
 ```dart
-import 'package:vlm/vlm.dart';
+import 'package:vlmrun/vlmrun.dart';
 
 void main() async {
   // Initialize the client
-  final client = Vlm(bearerToken: 'your-api-key');
+  final client = VlmRun(bearerToken: 'your-api-key');
 
   // Extract data from a web page
   final response = await client.web.generate(
@@ -145,11 +145,11 @@ void main() async {
 VLM Run supports callback URLs for asynchronous processing. When you provide a callback URL, the API will send a webhook notification to your endpoint when the prediction is complete.
 
 ```dart
-import 'package:vlm/vlm.dart';
+import 'package:vlmrun/vlmrun.dart';
 
 void main() async {
   // Initialize the client
-  final client = Vlm(bearerToken: 'your-api-key');
+  final client = VlmRun(bearerToken: 'your-api-key');
 
   // Process a document with callback URL
   final url = 'https://storage.googleapis.com/vlm-data-public-prod/hub/examples/document.invoice/google_invoice.pdf';
@@ -188,10 +188,10 @@ When the prediction is complete, VLM Run will send a POST request to your callba
 You can use the `predictions.wait()` method to poll for async prediction completion:
 
 ```dart
-import 'package:vlm/vlm.dart';
+import 'package:vlmrun/vlmrun.dart';
 
 void main() async {
-  final client = Vlm(bearerToken: 'your-api-key');
+  final client = VlmRun(bearerToken: 'your-api-key');
 
   // Start an async prediction
   final response = await client.document.generate(
@@ -215,11 +215,11 @@ void main() async {
 The VLM Run SDK provides OpenAI-compatible chat completions through the OpenAI endpoint.
 
 ```dart
-import 'package:vlm/vlm.dart';
+import 'package:vlmrun/vlmrun.dart';
 
 void main() async {
   // Initialize the client
-  final client = Vlm(bearerToken: 'your-api-key');
+  final client = VlmRun(bearerToken: 'your-api-key');
 
   // Use OpenAI-compatible chat completions
   final response = await client.openai.chatCompletions.create(
@@ -236,10 +236,10 @@ void main() async {
 ### Agent Operations
 
 ```dart
-import 'package:vlm/vlm.dart';
+import 'package:vlmrun/vlmrun.dart';
 
 void main() async {
-  final client = Vlm(bearerToken: 'your-api-key');
+  final client = VlmRun(bearerToken: 'your-api-key');
 
   // List available agents
   final agents = await client.agent.list();
@@ -262,10 +262,10 @@ void main() async {
 ### File Management
 
 ```dart
-import 'package:vlm/vlm.dart';
+import 'package:vlmrun/vlmrun.dart';
 
 void main() async {
-  final client = Vlm(bearerToken: 'your-api-key');
+  final client = VlmRun(bearerToken: 'your-api-key');
 
   // Upload a file
   final file = await client.files.create(
@@ -300,10 +300,10 @@ void main() async {
 ### Feedback
 
 ```dart
-import 'package:vlm/vlm.dart';
+import 'package:vlmrun/vlmrun.dart';
 
 void main() async {
-  final client = Vlm(bearerToken: 'your-api-key');
+  final client = VlmRun(bearerToken: 'your-api-key');
 
   // Submit feedback for a prediction
   final feedback = await client.feedback.submit(
@@ -325,10 +325,10 @@ void main() async {
 ### Hub and Domains
 
 ```dart
-import 'package:vlm/vlm.dart';
+import 'package:vlmrun/vlmrun.dart';
 
 void main() async {
-  final client = Vlm(bearerToken: 'your-api-key');
+  final client = VlmRun(bearerToken: 'your-api-key');
 
   // Get hub info
   final hubInfo = await client.hub.info();
@@ -395,7 +395,7 @@ To use the VLM Run API, you'll need an API key. You can obtain one by:
 Then use it to initialize the client:
 
 ```dart
-final client = Vlm(bearerToken: 'your-api-key');
+final client = VlmRun(bearerToken: 'your-api-key');
 ```
 
 While you can provide a `bearerToken` directly in the constructor, we recommend using environment variables or secure configuration management for production applications.
