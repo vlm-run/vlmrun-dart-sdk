@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../vlm_client.dart';
+import '../vlmrun_client.dart';
 import '../types/error.dart';
 import '../types/shared/prediction_response.dart';
 
@@ -8,7 +8,7 @@ import '../types/shared/prediction_response.dart';
 class ResponseResource {
   ResponseResource(this._client);
 
-  final Vlm _client;
+  final VlmRun _client;
 
   /// Get response JSON by request ID.
   Future<PredictionResponse> retrieve(String id) async {

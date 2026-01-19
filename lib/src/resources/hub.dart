@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../vlm_client.dart';
+import '../vlmrun_client.dart';
 import '../types/hub.dart';
 import '../utils/http_utils.dart';
 
@@ -8,7 +8,7 @@ import '../utils/http_utils.dart';
 class HubResource {
   HubResource(this._client);
 
-  final Vlm _client;
+  final VlmRun _client;
 
   /// Get hub info.
   Future<HubInfoResponse> info() async {

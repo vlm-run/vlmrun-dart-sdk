@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../vlm_client.dart';
+import '../vlmrun_client.dart';
 import '../types/hub.dart';
 import '../types/generation_config.dart';
 import '../utils/http_utils.dart';
@@ -9,7 +9,7 @@ import '../utils/http_utils.dart';
 class DomainsResource {
   DomainsResource(this._client);
 
-  final Vlm _client;
+  final VlmRun _client;
 
   /// List supported domains.
   Future<List<DomainInfo>> list() async {

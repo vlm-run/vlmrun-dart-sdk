@@ -1,8 +1,8 @@
 /// A Dart SDK for the Vlm API.
-library vlm;
+library vlmrun;
 
 // Client
-export 'src/vlm_client.dart';
+export 'src/vlmrun_client.dart';
 
 // Error types
 export 'src/types/error.dart';

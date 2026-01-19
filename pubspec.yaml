@@ -1,10 +1,10 @@
-name: vlm
-description: The Vlm Dart library provides convenient access to the Vlm REST API from any Dart application.
-version: 0.1.0
-repository: https://github.com/stainless-sdks/vlm-dart
+name: vlmrun
+description: The Vlm Run Dart SDK Dart library provides convenient access to the VLM Run REST API from any Dart application.
+version: 1.0.2
+repository: https://github.com/vlm-run/vlmrun-dart-sdk
 
 environment:
-  sdk: '>=3.6.0 <4.0.0'
+  sdk: ">=3.6.0 <4.0.0"
 
 dependencies:
   http: ^1.1.0

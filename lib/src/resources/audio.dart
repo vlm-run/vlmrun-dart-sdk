@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import '../types/audio_generate_params.dart';
 import '../types/shared/prediction_response.dart';
-import '../vlm_client.dart';
+import '../vlmrun_client.dart';
 import '../utils/http_utils.dart';
 
 /// Resource class for audio-related endpoints.
 class AudioResource {
   AudioResource(this._client);
 
-  final Vlm _client;
+  final VlmRun _client;
 
   /// Generate structured prediction for the given audio.
   Future<PredictionResponse> generate({

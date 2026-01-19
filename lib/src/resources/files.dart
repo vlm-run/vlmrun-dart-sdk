@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as path;
 
-import '../vlm_client.dart';
+import '../vlmrun_client.dart';
 import '../types/files.dart';
 import '../types/presigned_url.dart';
 import '../utils/http_utils.dart';
@@ -13,7 +13,7 @@ import '../utils/http_utils.dart';
 class FilesResource {
   FilesResource(this._client);
 
-  final Vlm _client;
+  final VlmRun _client;
 
   /// Create a file.
   Future<FileResponse> create({
@@ -90,7 +90,8 @@ class FilesResource {
         .toList();
   }
 
-  Future<FileResponse> retrieve(String fileId, {bool? generatePublicUrl}) async {
+  Future<FileResponse> retrieve(String fileId,
+      {bool? generatePublicUrl}) async {
     var path = '/v1/files/$fileId';
     if (generatePublicUrl != null) {
       final uri = Uri.parse(path).replace(queryParameters: {
