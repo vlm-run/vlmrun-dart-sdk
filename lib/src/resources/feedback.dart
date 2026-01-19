@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../vlm_client.dart';
+import '../vlmrun_client.dart';
 import '../types/feedback.dart';
 import '../utils/http_utils.dart';
 
@@ -8,7 +8,7 @@ import '../utils/http_utils.dart';
 class FeedbackResource {
   FeedbackResource(this._client);
 
-  final Vlm _client;
+  final VlmRun _client;
 
   /// Get feedback for an entity.
   ///
@@ -28,7 +28,8 @@ class FeedbackResource {
       'offset': offset.toString(),
     };
 
-    final uri = Uri.parse('/v1/feedback/$entityId').replace(queryParameters: queryParams);
+    final uri = Uri.parse('/v1/feedback/$entityId')
+        .replace(queryParameters: queryParams);
     final response = await _client.request('GET', uri.toString());
 
     if (!HttpUtils.isSuccessful(response.statusCode)) {
@@ -53,9 +54,8 @@ class FeedbackResource {
     Map<String, dynamic>? response,
     String? notes,
   }) async {
-    final idCount = [requestId, agentExecutionId, chatId]
-        .where((id) => id != null)
-        .length;
+    final idCount =
+        [requestId, agentExecutionId, chatId].where((id) => id != null).length;
     if (idCount != 1) {
       throw ArgumentError(
         'Must provide exactly one of: requestId, agentExecutionId, or chatId',

@@ -1,15 +1,15 @@
 import 'package:test/test.dart';
-import 'package:vlm/vlm.dart';
+import 'package:vlmrun/vlmrun.dart';
 
 import '../helpers.dart';
 
 void main() {
   late MockHttpClient mockClient;
-  late Vlm client;
+  late VlmRun client;
 
   setUp(() {
     mockClient = MockHttpClient();
-    client = Vlm(
+    client = VlmRun(
       bearerToken: 'test-token',
       httpClient: mockClient,
     );
@@ -57,7 +57,8 @@ void main() {
       expect(response.id, equals('123'));
       expect(response.status, equals('completed'));
       expect(response.response?['model'], equals('vlm-1'));
-      expect(response.response?['domain'], equals('web.ecommerce-product-catalog'));
+      expect(response.response?['domain'],
+          equals('web.ecommerce-product-catalog'));
       expect(response.response?['output']?['text'], equals('Web content'));
     });
 

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../vlm_client.dart';
+import '../vlmrun_client.dart';
 import '../types/error.dart';
 import '../types/schema.dart';
 
@@ -8,7 +8,7 @@ import '../types/schema.dart';
 class SchemaResource {
   SchemaResource(this._client);
 
-  final Vlm _client;
+  final VlmRun _client;
 
   /// Generate a schema prediction.
   Future<PredictionResponse> generate({

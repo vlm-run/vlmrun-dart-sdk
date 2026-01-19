@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import '../types/document_generate_params.dart';
 import '../types/shared/prediction_response.dart';
-import '../vlm_client.dart';
+import '../vlmrun_client.dart';
 import '../utils/http_utils.dart';
 
 /// Resource class for document-related endpoints.
 class DocumentResource {
   DocumentResource(this._client);
 
-  final Vlm _client;
+  final VlmRun _client;
 
   /// Generate document.
   Future<PredictionResponse> generate({

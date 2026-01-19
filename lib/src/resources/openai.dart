@@ -1,4 +1,4 @@
-import '../vlm_client.dart';
+import '../vlmrun_client.dart';
 import 'openai/chat_completions.dart';
 import 'openai/models.dart';
 
@@ -6,7 +6,7 @@ import 'openai/models.dart';
 class OpenAI {
   OpenAI(this._client);
 
-  final Vlm _client;
+  final VlmRun _client;
 
   /// Access to chat endpoints.
   late final chat = ChatCompletionsResource(_client);

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../vlm_client.dart';
+import '../vlmrun_client.dart';
 import '../types/error.dart';
 import '../types/model_info_response.dart';
 
@@ -8,7 +8,7 @@ import '../types/model_info_response.dart';
 class ModelsResource {
   ModelsResource(this._client);
 
-  final Vlm _client;
+  final VlmRun _client;
 
   /// Get the list of supported models.
   Future<List<ModelInfoResponse>> list() async {

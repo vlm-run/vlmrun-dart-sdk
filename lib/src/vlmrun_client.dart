@@ -19,9 +19,9 @@ import 'resources/domains.dart';
 import 'resources/video.dart';
 
 /// The main client for interacting with the Vlm API.
-class Vlm {
+class VlmRun {
   /// Creates a new Vlm client.
-  Vlm({
+  VlmRun({
     required String bearerToken,
     String baseUrl = 'https://api.vlm.run',
     Duration timeout = const Duration(seconds: 30),
@@ -100,9 +100,8 @@ class Vlm {
     late final http.Response response;
     switch (method) {
       case 'GET':
-        response = await _httpClient
-            .get(url, headers: headers)
-            .timeout(_timeout);
+        response =
+            await _httpClient.get(url, headers: headers).timeout(_timeout);
         break;
       case 'POST':
         response = await _httpClient
@@ -110,9 +109,8 @@ class Vlm {
             .timeout(_timeout);
         break;
       case 'DELETE':
-        response = await _httpClient
-            .delete(url, headers: headers)
-            .timeout(_timeout);
+        response =
+            await _httpClient.delete(url, headers: headers).timeout(_timeout);
         break;
       default:
         throw ArgumentError('Unsupported HTTP method: $method');
@@ -141,9 +139,7 @@ class Vlm {
       request.fields.addAll(fields);
     }
 
-    final streamedResponse = await _httpClient
-        .send(request)
-        .timeout(_timeout);
+    final streamedResponse = await _httpClient.send(request).timeout(_timeout);
 
     return http.Response.fromStream(streamedResponse);
   }

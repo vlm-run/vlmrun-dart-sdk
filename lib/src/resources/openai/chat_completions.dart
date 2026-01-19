@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 import '../../types/openai/chat_completion.dart';
-import '../../vlm_client.dart';
+import '../../vlmrun_client.dart';
 import '../../types/error.dart';
 
 /// Resource class for chat completion endpoints.
 class ChatCompletionsResource {
   ChatCompletionsResource(this._client);
 
-  final Vlm _client;
+  final VlmRun _client;
 
   /// Create a chat completion.
   Future<ChatCompletion> create({

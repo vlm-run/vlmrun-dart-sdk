@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../vlm_client.dart';
+import '../vlmrun_client.dart';
 import '../types/agent.dart';
 import '../utils/http_utils.dart';
 import 'predictions.dart';
@@ -9,7 +9,7 @@ import 'predictions.dart';
 class ExecutionsResource {
   ExecutionsResource(this._client);
 
-  final Vlm _client;
+  final VlmRun _client;
 
   /// List all executions.
   Future<List<AgentExecutionResponse>> list({
@@ -37,7 +37,8 @@ class ExecutionsResource {
 
     final json = jsonDecode(response.body) as List<dynamic>;
     return json
-        .map((item) => AgentExecutionResponse.fromJson(item as Map<String, dynamic>))
+        .map((item) =>
+            AgentExecutionResponse.fromJson(item as Map<String, dynamic>))
         .toList();
   }
 

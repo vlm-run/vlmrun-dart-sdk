@@ -1,15 +1,15 @@
 import 'package:test/test.dart';
-import 'package:vlm/vlm.dart';
+import 'package:vlmrun/vlmrun.dart';
 
 import '../helpers.dart';
 
 void main() {
   late MockHttpClient mockClient;
-  late Vlm client;
+  late VlmRun client;
 
   setUp(() {
     mockClient = MockHttpClient();
-    client = Vlm(
+    client = VlmRun(
       bearerToken: 'test-token',
       httpClient: mockClient,
     );

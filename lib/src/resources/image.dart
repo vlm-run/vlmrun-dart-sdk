@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import '../types/image_generate_params.dart';
 import '../types/shared/prediction_response.dart';
-import '../vlm_client.dart';
+import '../vlmrun_client.dart';
 import '../utils/http_utils.dart';
 
 /// Resource class for image-related endpoints.
 class ImageResource {
   ImageResource(this._client);
 
-  final Vlm _client;
+  final VlmRun _client;
 
   /// Generate an image.
   Future<PredictionResponse> generate({

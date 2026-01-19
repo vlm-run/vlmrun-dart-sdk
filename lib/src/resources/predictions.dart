@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../vlm_client.dart';
+import '../vlmrun_client.dart';
 import '../types/shared/prediction_response.dart';
 import '../utils/http_utils.dart';
 
@@ -16,7 +16,7 @@ class RequestTimeoutError implements Exception {
 class PredictionsResource {
   PredictionsResource(this._client);
 
-  final Vlm _client;
+  final VlmRun _client;
 
   /// List all predictions.
   Future<List<PredictionResponse>> list({
@@ -44,7 +44,8 @@ class PredictionsResource {
 
     final json = jsonDecode(response.body) as List<dynamic>;
     return json
-        .map((item) => PredictionResponse.fromJson(item as Map<String, dynamic>))
+        .map(
+            (item) => PredictionResponse.fromJson(item as Map<String, dynamic>))
         .toList();
   }
 

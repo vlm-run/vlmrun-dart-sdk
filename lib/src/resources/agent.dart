@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../vlm_client.dart';
+import '../vlmrun_client.dart';
 import '../types/agent.dart';
 import '../utils/http_utils.dart';
 
@@ -16,7 +16,7 @@ class InputError implements Exception {
 class AgentResource {
   AgentResource(this._client);
 
-  final Vlm _client;
+  final VlmRun _client;
 
   /// Get an agent by name, id, or prompt. Only one can be provided.
   Future<AgentInfo> get({
@@ -26,7 +26,8 @@ class AgentResource {
   }) async {
     final providedCount = [name, id, prompt].where((v) => v != null).length;
     if (providedCount != 1) {
-      throw InputError('Exactly one of `name`, `id`, or `prompt` must be provided');
+      throw InputError(
+          'Exactly one of `name`, `id`, or `prompt` must be provided');
     }
 
     final data = <String, dynamic>{};

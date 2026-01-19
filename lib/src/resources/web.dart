@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../vlm_client.dart';
+import '../vlmrun_client.dart';
 import '../types/web_generate_params.dart';
 import '../types/shared/prediction_response.dart';
 import '../utils/http_utils.dart';
@@ -9,7 +9,7 @@ import '../utils/http_utils.dart';
 class WebResource {
   WebResource(this._client);
 
-  final Vlm _client;
+  final VlmRun _client;
 
   /// Generate structured prediction for the given url.
   Future<PredictionResponse> generate({

@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 import '../../types/openai/model.dart';
-import '../../vlm_client.dart';
+import '../../vlmrun_client.dart';
 import '../../types/error.dart';
 
 /// Resource class for model-related endpoints.
 class ModelsResource {
   ModelsResource(this._client);
 
-  final Vlm _client;
+  final VlmRun _client;
 
   /// List all available models.
   Future<ModelList> list() async {

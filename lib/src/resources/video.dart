@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import '../types/video_generate_params.dart';
 import '../types/shared/prediction_response.dart';
-import '../vlm_client.dart';
+import '../vlmrun_client.dart';
 import '../utils/http_utils.dart';
 
 /// Resource class for video-related endpoints.
 class VideoResource {
   VideoResource(this._client);
 
-  final Vlm _client;
+  final VlmRun _client;
 
   /// Generate structured prediction for the given video.
   Future<PredictionResponse> generate({
