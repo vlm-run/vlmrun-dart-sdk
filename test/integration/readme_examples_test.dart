@@ -9,7 +9,7 @@ import 'package:vlmrun/vlmrun.dart';
 /// These tests require a valid VLM_API_KEY environment variable.
 /// Optionally set VLM_BASE_URL to override the default API endpoint.
 ///
-/// Run with: dart test --tags integration
+/// Run with: VLM_API_KEY=your-api-key dart test --tags integration
 /// Or with custom base URL: VLM_API_KEY=your-api-key VLM_BASE_URL=https://custom.api.url dart test --tags integration
 void main() {
   final apiKey = Platform.environment['VLM_API_KEY'];
@@ -18,18 +18,17 @@ void main() {
   final agentBaseUrl =
       Platform.environment['VLM_AGENT_BASE_URL'] ?? 'https://agent.vlm.run/v1';
 
-  group('README Examples', () {
+  // Skip all integration tests if API key is not provided
+  final skipReason = apiKey == null || apiKey.isEmpty
+      ? 'VLM_API_KEY environment variable is required. Run with: VLM_API_KEY=your-api-key dart test --tags integration'
+      : null;
+
+  group('README Examples', skip: skipReason, () {
     late VlmRun client;
 
     setUpAll(() {
-      if (apiKey == null || apiKey.isEmpty) {
-        throw StateError(
-          'VLM_API_KEY environment variable is required for integration tests.\n'
-          'Run with: VLM_API_KEY=your-api-key dart test --tags integration',
-        );
-      }
       client = VlmRun(
-        bearerToken: apiKey,
+        bearerToken: apiKey!,
         baseUrl: baseUrl,
         timeout: const Duration(seconds: 120),
       );

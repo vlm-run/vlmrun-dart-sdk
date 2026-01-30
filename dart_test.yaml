@@ -1,6 +1,5 @@
-# Test configuration
-#
-# Run unit tests only (default): dart test
-# Run integration tests: VLM_API_KEY=your-api-key dart test test/integration/
+# Test configuration for vlmrun SDK
 tags:
   integration:
+    # Integration tests require VLM_API_KEY environment variable
+    # Run with: VLM_API_KEY=your-api-key dart test --tags integration
