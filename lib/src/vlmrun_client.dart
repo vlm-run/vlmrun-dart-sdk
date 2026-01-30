@@ -8,8 +8,6 @@ import 'resources/audio.dart';
 import 'resources/image.dart';
 import 'resources/document.dart';
 import 'resources/models.dart';
-import 'resources/web.dart';
-import 'resources/response.dart';
 import 'resources/predictions.dart';
 import 'resources/agent.dart';
 import 'resources/executions.dart';
@@ -56,12 +54,6 @@ class VlmRun {
 
   /// Access to model-related endpoints.
   late final models = ModelsResource(this);
-
-  /// Access to web-related endpoints.
-  late final web = WebResource(this);
-
-  /// Access to response-related endpoints.
-  late final response = ResponseResource(this);
 
   /// Access to prediction-related endpoints.
   late final predictions = PredictionsResource(this);

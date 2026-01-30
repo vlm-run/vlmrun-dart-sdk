@@ -26,7 +26,6 @@ export 'src/types/credit_usage.dart';
 export 'src/types/audio_generate_params.dart';
 export 'src/types/image_generate_params.dart';
 export 'src/types/document_generate_params.dart';
-export 'src/types/web_generate_params.dart';
 export 'src/types/video_generate_params.dart';
 
 // Config types

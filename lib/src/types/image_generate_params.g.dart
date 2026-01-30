@@ -8,7 +8,8 @@ part of 'image_generate_params.dart';
 
 ImageGenerateParams _$ImageGenerateParamsFromJson(Map<String, dynamic> json) =>
     ImageGenerateParams(
-      image: json['image'] as String,
+      images:
+          (json['images'] as List<dynamic>).map((e) => e as String).toList(),
       id: json['id'] as String?,
       callbackUrl: json['callback_url'] as String?,
       createdAt: json['created_at'] == null
@@ -25,7 +26,7 @@ ImageGenerateParams _$ImageGenerateParamsFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$ImageGenerateParamsToJson(ImageGenerateParams instance) {
   final val = <String, dynamic>{
-    'image': instance.image,
+    'images': instance.images,
   };
 
   void writeNotNull(String key, dynamic value) {

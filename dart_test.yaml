@@ -1,0 +1,6 @@
+# Test configuration
+#
+# Run unit tests only (default): dart test
+# Run integration tests: VLM_API_KEY=your-api-key dart test test/integration/
+tags:
+  integration:

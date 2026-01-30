@@ -5,7 +5,7 @@ part 'image_generate_params.g.dart';
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ImageGenerateParams {
   ImageGenerateParams({
-    required this.image,
+    required this.images,
     this.id,
     this.callbackUrl,
     this.createdAt,
@@ -16,7 +16,7 @@ class ImageGenerateParams {
     this.model = 'vlm-1',
   });
 
-  final String image;
+  final List<String> images;
   final String? id;
   @JsonKey(name: 'callback_url')
   final String? callbackUrl;

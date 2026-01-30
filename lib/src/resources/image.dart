@@ -11,7 +11,9 @@ class ImageResource {
 
   final VlmRun _client;
 
-  /// Generate an image.
+  /// Generate an image prediction.
+  ///
+  /// [image] - A single image URL to process.
   Future<PredictionResponse> generate({
     required String image,
     String? id,
@@ -24,7 +26,7 @@ class ImageResource {
     String model = 'vlm-1',
   }) async {
     final params = ImageGenerateParams(
-      image: image,
+      images: [image],
       id: id,
       callbackUrl: callbackUrl,
       createdAt: createdAt,
