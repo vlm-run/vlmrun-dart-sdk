@@ -40,19 +40,18 @@ void main() {
       );
 
       final response = await client.audio.generate(
-        id: 'id',
-        batch: true,
-        callbackUrl: 'https://example.com',
-        createdAt: DateTime.parse('2019-12-27T18:11:19.117Z'),
-        domain: 'audio.transcription',
-        fileId: 'file_id',
-        metadata: AudioMetadata(
-          allowTraining: true,
-          environment: 'dev',
-          sessionId: 'session_id',
+        FilePredictionParams(
+          fileId: 'file_id',
+          domain: 'audio.transcription',
+          model: 'vlm-1',
+          batch: true,
+          metadata: RequestMetadata(
+            allowTraining: true,
+            environment: 'dev',
+            sessionId: 'session_id',
+          ),
+          callbackUrl: 'https://example.com',
         ),
-        model: 'vlm-1',
-        url: 'url',
       );
 
       expect(response.id, equals('123'));
@@ -80,31 +79,35 @@ void main() {
       );
 
       expect(
-        () => client.audio.generate(fileId: ''),
+        () => client.audio.generate(
+          FilePredictionParams(
+            fileId: 'file_id',
+            domain: 'audio.transcription',
+          ),
+        ),
         throwsA(isA<BadRequestError>()),
       );
     });
 
-    test('handles error responses for audio generate endpoint', () async {
-      mockClient.addResponse(
-        'POST',
-        '/v1/audio/generate',
-        MockResponse(
-          statusCode: 400,
-          body: '''
-          {
-            "error": {
-              "code": "bad_request",
-              "message": "Invalid request"
-            }
-          }
-          ''',
-        ),
-      );
-
+    test('throws InputError when neither fileId nor url provided', () {
       expect(
-        () => client.audio.generate(fileId: ''),
-        throwsA(isA<BadRequestError>()),
+        () => client.audio.generate(
+          FilePredictionParams(domain: 'audio.transcription'),
+        ),
+        throwsA(isA<InputError>()),
+      );
+    });
+
+    test('throws InputError when both fileId and url provided', () {
+      expect(
+        () => client.audio.generate(
+          FilePredictionParams(
+            fileId: 'file_id',
+            url: 'https://example.com/audio.mp3',
+            domain: 'audio.transcription',
+          ),
+        ),
+        throwsA(isA<InputError>()),
       );
     });
   });

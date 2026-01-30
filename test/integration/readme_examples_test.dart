@@ -41,15 +41,19 @@ void main() {
         final imageUrl =
             'https://storage.googleapis.com/vlm-data-public-prod/hub/examples/document.invoice/invoice_1.jpg';
         final response = await client.image.generate(
-          image: imageUrl,
-          domain: 'document.invoice',
-          jsonSchema: {
-            'type': 'object',
-            'properties': {
-              'invoice_number': {'type': 'string'},
-              'total_amount': {'type': 'number'},
-            },
-          },
+          ImagePredictionParams(
+            urls: [imageUrl],
+            domain: 'document.invoice',
+            config: GenerationConfig(
+              jsonSchema: {
+                'type': 'object',
+                'properties': {
+                  'invoice_number': {'type': 'string'},
+                  'total_amount': {'type': 'number'},
+                },
+              },
+            ),
+          ),
         );
 
         expect(response.id, isNotNull);
@@ -75,9 +79,11 @@ void main() {
 
         // Generate prediction from the uploaded file
         final response = await client.document.generate(
-          fileId: uploadedFile.id,
-          model: 'vlm-1',
-          domain: 'document.invoice',
+          FilePredictionParams(
+            fileId: uploadedFile.id,
+            model: 'vlm-1',
+            domain: 'document.invoice',
+          ),
         );
 
         expect(response.id, isNotNull);
@@ -91,8 +97,10 @@ void main() {
         final imageUrl =
             'https://storage.googleapis.com/vlm-data-public-prod/hub/examples/document.invoice/invoice_1.jpg';
         final response = await client.image.generate(
-          image: imageUrl,
-          domain: 'document.invoice',
+          ImagePredictionParams(
+            urls: [imageUrl],
+            domain: 'document.invoice',
+          ),
         );
 
         expect(response.id, isNotNull);
@@ -134,8 +142,10 @@ void main() {
         final imageUrl =
             'https://storage.googleapis.com/vlm-data-public-prod/hub/examples/document.invoice/invoice_1.jpg';
         final created = await client.image.generate(
-          image: imageUrl,
-          domain: 'document.invoice',
+          ImagePredictionParams(
+            urls: [imageUrl],
+            domain: 'document.invoice',
+          ),
         );
 
         expect(created.id, isNotNull);
@@ -151,8 +161,10 @@ void main() {
         final imageUrl =
             'https://storage.googleapis.com/vlm-data-public-prod/hub/examples/document.invoice/invoice_1.jpg';
         final response = await client.image.generate(
-          image: imageUrl,
-          domain: 'document.invoice',
+          ImagePredictionParams(
+            urls: [imageUrl],
+            domain: 'document.invoice',
+          ),
         );
 
         expect(response.id, isNotNull);

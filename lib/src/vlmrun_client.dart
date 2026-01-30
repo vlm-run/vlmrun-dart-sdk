@@ -2,11 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
 import 'resources/openai.dart';
-import 'resources/schema.dart';
 import 'resources/files.dart';
-import 'resources/audio.dart';
-import 'resources/image.dart';
-import 'resources/document.dart';
 import 'resources/models.dart';
 import 'resources/predictions.dart';
 import 'resources/agent.dart';
@@ -14,7 +10,7 @@ import 'resources/executions.dart';
 import 'resources/feedback.dart';
 import 'resources/hub.dart';
 import 'resources/domains.dart';
-import 'resources/video.dart';
+import 'resources/artifacts.dart';
 
 /// The main client for interacting with the Vlm API.
 class VlmRun {
@@ -37,26 +33,26 @@ class VlmRun {
   /// Access to file-related endpoints.
   late final files = FilesResource(this);
 
-  /// Access to schema-related endpoints.
-  late final schema = SchemaResource(this);
-
   /// Access to OpenAI-compatible endpoints.
   late final openai = OpenAI(this);
-
-  /// Access to audio-related endpoints.
-  late final audio = AudioResource(this);
-
-  /// Access to image-related endpoints.
-  late final image = ImageResource(this);
-
-  /// Access to document-related endpoints.
-  late final document = DocumentResource(this);
 
   /// Access to model-related endpoints.
   late final models = ModelsResource(this);
 
-  /// Access to prediction-related endpoints.
+  /// Access to prediction-related endpoints (list, get, wait).
   late final predictions = PredictionsResource(this);
+
+  /// Access to image prediction endpoints.
+  late final image = ImagePredictionsResource(this);
+
+  /// Access to document prediction endpoints.
+  late final document = FilePredictionsResource(this, 'document');
+
+  /// Access to audio prediction endpoints.
+  late final audio = FilePredictionsResource(this, 'audio');
+
+  /// Access to video prediction endpoints.
+  late final video = FilePredictionsResource(this, 'video');
 
   /// Access to agent-related endpoints.
   late final agent = AgentResource(this);
@@ -73,8 +69,8 @@ class VlmRun {
   /// Access to domain-related endpoints.
   late final domains = DomainsResource(this);
 
-  /// Access to video-related endpoints.
-  late final video = VideoResource(this);
+  /// Access to artifact-related endpoints.
+  late final artifacts = ArtifactsResource(this);
 
   /// Makes an HTTP request to the Vlm API.
   @internal
@@ -106,6 +102,37 @@ class VlmRun {
         break;
       default:
         throw ArgumentError('Unsupported HTTP method: $method');
+    }
+
+    return response;
+  }
+
+  /// Makes an HTTP request to the Vlm API and returns raw bytes.
+  @internal
+  Future<http.Response> requestBytes(
+    String method,
+    String path, {
+    Map<String, String>? queryParams,
+    Duration? timeout,
+  }) async {
+    var uri = Uri.parse('$_baseUrl$path');
+    if (queryParams != null && queryParams.isNotEmpty) {
+      uri = uri.replace(queryParameters: queryParams);
+    }
+    final headers = {
+      'Authorization': 'Bearer $_bearerToken',
+    };
+
+    final effectiveTimeout = timeout ?? const Duration(minutes: 2);
+
+    late final http.Response response;
+    switch (method) {
+      case 'GET':
+        response =
+            await _httpClient.get(uri, headers: headers).timeout(effectiveTimeout);
+        break;
+      default:
+        throw ArgumentError('Unsupported HTTP method for bytes request: $method');
     }
 
     return response;

@@ -3,14 +3,7 @@ import 'dart:convert';
 import '../vlmrun_client.dart';
 import '../types/agent.dart';
 import '../utils/http_utils.dart';
-
-class InputError implements Exception {
-  InputError(this.message);
-  final String message;
-
-  @override
-  String toString() => 'InputError: $message';
-}
+import 'predictions.dart' show InputError;
 
 /// Resource class for agent-related endpoints.
 class AgentResource {

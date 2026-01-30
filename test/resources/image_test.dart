@@ -40,19 +40,21 @@ void main() {
       );
 
       final response = await client.image.generate(
-        image: 'base64_encoded_image',
-        id: 'id',
-        callbackUrl: 'https://example.com',
-        createdAt: DateTime.parse('2019-12-27T18:11:19.117Z'),
-        detail: 'hi',
-        domain: 'document.generative',
-        jsonSchema: {'type': 'object'},
-        metadata: ImageMetadata(
-          allowTraining: true,
-          environment: 'dev',
-          sessionId: 'session_id',
+        ImagePredictionParams(
+          images: ['base64_encoded_image'],
+          domain: 'document.generative',
+          model: 'vlm-1',
+          config: GenerationConfig(
+            detail: 'hi',
+            jsonSchema: {'type': 'object'},
+          ),
+          metadata: RequestMetadata(
+            allowTraining: true,
+            environment: 'dev',
+            sessionId: 'session_id',
+          ),
+          callbackUrl: 'https://example.com',
         ),
-        model: 'vlm-1',
       );
 
       expect(response.id, equals('123'));
@@ -81,31 +83,35 @@ void main() {
       );
 
       expect(
-        () => client.image.generate(image: ''),
+        () => client.image.generate(
+          ImagePredictionParams(
+            images: ['test'],
+            domain: 'test',
+          ),
+        ),
         throwsA(isA<BadRequestError>()),
       );
     });
 
-    test('handles error responses for image generate endpoint', () async {
-      mockClient.addResponse(
-        'POST',
-        '/v1/image/generate',
-        MockResponse(
-          statusCode: 400,
-          body: '''
-          {
-            "error": {
-              "code": "bad_request",
-              "message": "Invalid request"
-            }
-          }
-          ''',
-        ),
-      );
-
+    test('throws InputError when neither images nor urls provided', () {
       expect(
-        () => client.image.generate(image: ''),
-        throwsA(isA<BadRequestError>()),
+        () => client.image.generate(
+          ImagePredictionParams(domain: 'test'),
+        ),
+        throwsA(isA<InputError>()),
+      );
+    });
+
+    test('throws InputError when both images and urls provided', () {
+      expect(
+        () => client.image.generate(
+          ImagePredictionParams(
+            images: ['test'],
+            urls: ['https://example.com/image.jpg'],
+            domain: 'test',
+          ),
+        ),
+        throwsA(isA<InputError>()),
       );
     });
   });

@@ -40,20 +40,22 @@ void main() {
       );
 
       final response = await client.document.generate(
-        id: 'id',
-        batch: true,
-        callbackUrl: 'https://example.com',
-        createdAt: DateTime.parse('2019-12-27T18:11:19.117Z'),
-        detail: 'hi',
-        domain: 'document.generative',
-        fileId: 'file_123',
-        jsonSchema: {'type': 'object'},
-        metadata: DocumentMetadata(
-          allowTraining: true,
-          environment: 'dev',
-          sessionId: 'session_id',
+        FilePredictionParams(
+          fileId: 'file_123',
+          domain: 'document.generative',
+          model: 'vlm-1',
+          batch: true,
+          config: GenerationConfig(
+            detail: 'hi',
+            jsonSchema: {'type': 'object'},
+          ),
+          metadata: RequestMetadata(
+            allowTraining: true,
+            environment: 'dev',
+            sessionId: 'session_id',
+          ),
+          callbackUrl: 'https://example.com',
         ),
-        model: 'vlm-1',
       );
 
       expect(response.id, equals('123'));
@@ -81,31 +83,35 @@ void main() {
       );
 
       expect(
-        () => client.document.generate(fileId: ''),
+        () => client.document.generate(
+          FilePredictionParams(
+            fileId: 'file_id',
+            domain: 'document.generative',
+          ),
+        ),
         throwsA(isA<BadRequestError>()),
       );
     });
 
-    test('handles error responses for document generate endpoint', () async {
-      mockClient.addResponse(
-        'POST',
-        '/v1/document/generate',
-        MockResponse(
-          statusCode: 400,
-          body: '''
-          {
-            "error": {
-              "code": "bad_request",
-              "message": "Invalid request"
-            }
-          }
-          ''',
-        ),
-      );
-
+    test('throws InputError when neither fileId nor url provided', () {
       expect(
-        () => client.document.generate(fileId: ''),
-        throwsA(isA<BadRequestError>()),
+        () => client.document.generate(
+          FilePredictionParams(domain: 'document.generative'),
+        ),
+        throwsA(isA<InputError>()),
+      );
+    });
+
+    test('throws InputError when both fileId and url provided', () {
+      expect(
+        () => client.document.generate(
+          FilePredictionParams(
+            fileId: 'file_id',
+            url: 'https://example.com/document.pdf',
+            domain: 'document.generative',
+          ),
+        ),
+        throwsA(isA<InputError>()),
       );
     });
   });
