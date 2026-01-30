@@ -22,13 +22,6 @@ export 'src/types/model_info_response.dart';
 export 'src/types/shared/prediction_response.dart';
 export 'src/types/credit_usage.dart';
 
-// Generation params
-export 'src/types/audio_generate_params.dart';
-export 'src/types/image_generate_params.dart';
-export 'src/types/document_generate_params.dart';
-export 'src/types/web_generate_params.dart';
-export 'src/types/video_generate_params.dart';
-
 // Config types
 export 'src/types/generation_config.dart';
 export 'src/types/request_metadata.dart';
@@ -49,4 +42,4 @@ export 'src/resources/executions.dart';
 export 'src/resources/feedback.dart';
 export 'src/resources/hub.dart';
 export 'src/resources/domains.dart';
-export 'src/resources/video.dart';
+export 'src/resources/artifacts.dart';
