@@ -108,7 +108,7 @@ class FineTuningResource {
     if (skip != null) queryParams['skip'] = skip.toString();
     if (limit != null) queryParams['limit'] = limit.toString();
 
-    var path = '/v1/fine_tuning';
+    var path = '/v1/fine_tuning/jobs';
     if (queryParams.isNotEmpty) {
       final uri = Uri.parse(path).replace(queryParameters: queryParams);
       path = uri.toString();
@@ -130,13 +130,42 @@ class FineTuningResource {
         .toList();
   }
 
+  /// List available fine-tuned models.
+  Future<List<String>> listModels({
+    int? skip,
+    int? limit,
+  }) async {
+    final queryParams = <String, String>{};
+    if (skip != null) queryParams['skip'] = skip.toString();
+    if (limit != null) queryParams['limit'] = limit.toString();
+
+    var path = '/v1/fine_tuning/models';
+    if (queryParams.isNotEmpty) {
+      final uri = Uri.parse(path).replace(queryParameters: queryParams);
+      path = uri.toString();
+    }
+
+    final response = await _client.request('GET', path);
+
+    if (!HttpUtils.isSuccessful(response.statusCode)) {
+      HttpUtils.handleErrorResponse(
+        response.statusCode,
+        jsonDecode(response.body) as Map<String, dynamic>,
+      );
+    }
+
+    final json = jsonDecode(response.body) as List<dynamic>;
+    return json.map((item) => item.toString()).toList();
+  }
+
   /// Get fine-tuning job by ID.
   Future<FinetuningResponse> get(String jobId) async {
     if (jobId.isEmpty) {
       throw ArgumentError('Expected a non-empty value for `jobId`');
     }
 
-    final response = await _client.request('GET', '/v1/fine_tuning/$jobId');
+    final response =
+        await _client.request('GET', '/v1/fine_tuning/jobs/$jobId');
 
     if (!HttpUtils.isSuccessful(response.statusCode)) {
       HttpUtils.handleErrorResponse(

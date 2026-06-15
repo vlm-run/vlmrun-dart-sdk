@@ -28,6 +28,7 @@ class FileResponse {
     required this.createdAt,
     required this.filename,
     required this.purpose,
+    this.publicUrl,
   });
 
   final String id;
@@ -36,6 +37,7 @@ class FileResponse {
   final DateTime? createdAt;
   final String filename;
   final String purpose;
+  final String? publicUrl;
 
   factory FileResponse.fromJson(Map<String, dynamic> json) =>
       _$FileResponseFromJson(json);

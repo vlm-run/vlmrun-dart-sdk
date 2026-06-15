@@ -97,6 +97,25 @@ class AgentResource {
     return AgentCreationResponse.fromJson(json);
   }
 
+  /// Get agent information by ID.
+  Future<AgentInfo> getById(String agentId) async {
+    if (agentId.isEmpty) {
+      throw InputError('Expected a non-empty value for `agentId`');
+    }
+
+    final response = await _client.request('GET', '/v1/agents/$agentId');
+
+    if (!HttpUtils.isSuccessful(response.statusCode)) {
+      HttpUtils.handleErrorResponse(
+        response.statusCode,
+        jsonDecode(response.body) as Map<String, dynamic>,
+      );
+    }
+
+    final json = jsonDecode(response.body) as Map<String, dynamic>;
+    return AgentInfo.fromJson(json);
+  }
+
   /// Execute an agent.
   ///
   /// [name] - Name of the agent to execute
