@@ -26,7 +26,7 @@ build: ## Generate JSON serialization code
 	dart run build_runner build --delete-conflicting-outputs
 
 test: ## Run unit tests (excludes integration tests)
-	dart test
+	dart test --exclude-tags integration
 
 test-integration: ## Run integration tests (requires VLM_API_KEY)
 	dart test --tags integration

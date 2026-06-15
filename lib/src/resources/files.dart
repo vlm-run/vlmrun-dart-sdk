@@ -40,8 +40,6 @@ class FilesResource {
 
     final json = jsonDecode(response.body) as Map<String, dynamic>;
 
-    print(json);
-
     if (!HttpUtils.isSuccessful(response.statusCode)) {
       HttpUtils.handleErrorResponse(
         response.statusCode,
