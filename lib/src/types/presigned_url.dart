@@ -2,7 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'presigned_url.g.dart';
 
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
+@JsonSerializable(
+    explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
 class PresignedUrlRequest {
   PresignedUrlRequest({
     required this.filename,
@@ -18,7 +19,8 @@ class PresignedUrlRequest {
   Map<String, dynamic> toJson() => _$PresignedUrlRequestToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
+@JsonSerializable(
+    explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
 class PresignedUrlResponse {
   PresignedUrlResponse({
     this.id,

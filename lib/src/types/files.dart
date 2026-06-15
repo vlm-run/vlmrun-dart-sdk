@@ -18,7 +18,8 @@ class FileRequest {
   Map<String, dynamic> toJson() => _$FileRequestToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
+@JsonSerializable(
+    explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
 class FileResponse {
   FileResponse({
     required this.id,

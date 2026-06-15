@@ -2,7 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'feedback.g.dart';
 
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
+@JsonSerializable(
+    explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
 class FeedbackItem {
   FeedbackItem({
     required this.id,
@@ -28,7 +29,8 @@ class FeedbackItem {
   Map<String, dynamic> toJson() => _$FeedbackItemToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
+@JsonSerializable(
+    explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
 class FeedbackListResponse {
   FeedbackListResponse({
     this.requestId,
@@ -48,7 +50,8 @@ class FeedbackListResponse {
   Map<String, dynamic> toJson() => _$FeedbackListResponseToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
+@JsonSerializable(
+    explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
 class FeedbackSubmitRequest {
   FeedbackSubmitRequest({
     this.requestId,
@@ -70,7 +73,8 @@ class FeedbackSubmitRequest {
   Map<String, dynamic> toJson() => _$FeedbackSubmitRequestToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
+@JsonSerializable(
+    explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
 class FeedbackSubmitResponse {
   FeedbackSubmitResponse({
     required this.id,

@@ -13,6 +13,7 @@ class PredictionResponse {
     this.status = 'pending',
     this.message,
     this.usage,
+    this.domain,
   });
 
   /// Unique identifier of the response.
@@ -37,6 +38,9 @@ class PredictionResponse {
 
   /// Credit usage information.
   final CreditUsage? usage;
+
+  /// The domain of the prediction.
+  final String? domain;
 
   factory PredictionResponse.fromJson(Map<String, dynamic> json) =>
       _$PredictionResponseFromJson(json);

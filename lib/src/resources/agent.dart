@@ -98,6 +98,15 @@ class AgentResource {
   }
 
   /// Execute an agent.
+  ///
+  /// [name] - Name of the agent to execute
+  /// [inputs] - Optional inputs to the agent
+  /// [batch] - Whether to process in batch mode (async)
+  /// [config] - Optional agent execution configuration
+  /// [metadata] - Optional request metadata
+  /// [callbackUrl] - Optional URL to call when execution is complete
+  /// [model] - VLM Run Agent model to use (default: "vlmrun-orion-1:auto")
+  /// [toolsets] - Optional list of tool categories to enable
   Future<AgentExecutionResponse> execute({
     String? name,
     Map<String, dynamic>? inputs,
@@ -105,12 +114,15 @@ class AgentResource {
     AgentExecutionConfig? config,
     Map<String, dynamic>? metadata,
     String? callbackUrl,
+    String model = 'vlmrun-orion-1:auto',
+    List<String>? toolsets,
   }) async {
     if (!batch) {
       throw InputError('Batch mode is required for agent execution');
     }
 
     final data = <String, dynamic>{
+      'model': model,
       'batch': batch,
     };
     if (name != null) data['name'] = name;
@@ -118,6 +130,7 @@ class AgentResource {
     if (config != null) data['config'] = config.toJson();
     if (metadata != null) data['metadata'] = metadata;
     if (callbackUrl != null) data['callback_url'] = callbackUrl;
+    if (toolsets != null) data['toolsets'] = toolsets;
 
     final response = await _client.request(
       'POST',

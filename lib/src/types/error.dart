@@ -12,8 +12,9 @@ class VlmError implements Exception {
   final int statusCode;
   final Map<String, dynamic> details;
 
-  factory VlmError.fromJson(Map<String, dynamic> json) => _$VlmErrorFromJson(json);
-  
+  factory VlmError.fromJson(Map<String, dynamic> json) =>
+      _$VlmErrorFromJson(json);
+
   Map<String, dynamic> toJson() => _$VlmErrorToJson(this);
 
   @override

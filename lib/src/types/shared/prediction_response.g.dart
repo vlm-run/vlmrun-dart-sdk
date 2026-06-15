@@ -17,6 +17,7 @@ PredictionResponse _$PredictionResponseFromJson(Map<String, dynamic> json) =>
       usage: json['usage'] == null
           ? null
           : CreditUsage.fromJson(json['usage'] as Map<String, dynamic>),
+      domain: json['domain'] as String?,
     );
 
 Map<String, dynamic> _$PredictionResponseToJson(PredictionResponse instance) =>
@@ -28,4 +29,5 @@ Map<String, dynamic> _$PredictionResponseToJson(PredictionResponse instance) =>
       'status': instance.status,
       'message': instance.message,
       'usage': instance.usage?.toJson(),
+      'domain': instance.domain,
     };
