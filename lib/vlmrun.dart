@@ -29,6 +29,15 @@ export 'src/types/request_metadata.dart';
 // Agent types
 export 'src/types/agent.dart';
 
+// Skill types
+export 'src/types/skill.dart';
+
+// Dataset types
+export 'src/types/dataset.dart';
+
+// Fine-tuning types
+export 'src/types/fine_tuning.dart';
+
 // Feedback types
 export 'src/types/feedback.dart';
 
@@ -43,3 +52,6 @@ export 'src/resources/feedback.dart';
 export 'src/resources/hub.dart';
 export 'src/resources/domains.dart';
 export 'src/resources/artifacts.dart';
+export 'src/resources/skills.dart';
+export 'src/resources/datasets.dart';
+export 'src/resources/fine_tuning.dart';

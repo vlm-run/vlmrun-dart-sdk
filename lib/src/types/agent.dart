@@ -1,9 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'credit_usage.dart';
+import 'skill.dart';
 
 part 'agent.g.dart';
 
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
+@JsonSerializable(
+    explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
 class AgentInfo {
   AgentInfo({
     required this.id,
@@ -33,7 +35,8 @@ class AgentInfo {
   Map<String, dynamic> toJson() => _$AgentInfoToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
+@JsonSerializable(
+    explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
 class AgentExecutionResponse {
   AgentExecutionResponse({
     required this.id,
@@ -59,7 +62,8 @@ class AgentExecutionResponse {
   Map<String, dynamic> toJson() => _$AgentExecutionResponseToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
+@JsonSerializable(
+    explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
 class AgentCreationResponse {
   AgentCreationResponse({
     required this.id,
@@ -81,15 +85,20 @@ class AgentCreationResponse {
   Map<String, dynamic> toJson() => _$AgentCreationResponseToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
+@JsonSerializable(
+    explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
 class AgentExecutionConfig {
   AgentExecutionConfig({
     this.prompt,
     this.jsonSchema,
+    this.skills,
+    this.serviceTier,
   });
 
   final String? prompt;
   final Map<String, dynamic>? jsonSchema;
+  final List<AgentSkill>? skills;
+  final String? serviceTier;
 
   factory AgentExecutionConfig.fromJson(Map<String, dynamic> json) =>
       _$AgentExecutionConfigFromJson(json);
@@ -97,15 +106,20 @@ class AgentExecutionConfig {
   Map<String, dynamic> toJson() => _$AgentExecutionConfigToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
+@JsonSerializable(
+    explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
 class AgentCreationConfig {
   AgentCreationConfig({
     this.prompt,
     this.jsonSchema,
+    this.skills,
+    this.serviceTier,
   });
 
   final String? prompt;
   final Map<String, dynamic>? jsonSchema;
+  final List<AgentSkill>? skills;
+  final String? serviceTier;
 
   factory AgentCreationConfig.fromJson(Map<String, dynamic> json) =>
       _$AgentCreationConfigFromJson(json);

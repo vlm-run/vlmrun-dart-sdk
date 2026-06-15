@@ -2,7 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'request_metadata.g.dart';
 
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
+@JsonSerializable(
+    explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
 class RequestMetadata {
   RequestMetadata({
     this.environment = 'dev',

@@ -14,11 +14,12 @@ class ModelList {
 
   factory ModelList.fromJson(Map<String, dynamic> json) =>
       _$ModelListFromJson(json);
-  
+
   Map<String, dynamic> toJson() => _$ModelListToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
+@JsonSerializable(
+    explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
 class Model {
   Model({
     required this.id,
@@ -39,11 +40,12 @@ class Model {
   final String? parent;
 
   factory Model.fromJson(Map<String, dynamic> json) => _$ModelFromJson(json);
-  
+
   Map<String, dynamic> toJson() => _$ModelToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
+@JsonSerializable(
+    explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
 class ModelPermission {
   ModelPermission({
     required this.id,
@@ -75,6 +77,6 @@ class ModelPermission {
 
   factory ModelPermission.fromJson(Map<String, dynamic> json) =>
       _$ModelPermissionFromJson(json);
-  
+
   Map<String, dynamic> toJson() => _$ModelPermissionToJson(this);
 }

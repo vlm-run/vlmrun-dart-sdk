@@ -22,7 +22,7 @@ class ChatCompletion {
 
   factory ChatCompletion.fromJson(Map<String, dynamic> json) =>
       _$ChatCompletionFromJson(json);
-  
+
   Map<String, dynamic> toJson() => _$ChatCompletionToJson(this);
 }
 
@@ -41,7 +41,7 @@ class ChatCompletionChoice {
 
   factory ChatCompletionChoice.fromJson(Map<String, dynamic> json) =>
       _$ChatCompletionChoiceFromJson(json);
-  
+
   Map<String, dynamic> toJson() => _$ChatCompletionChoiceToJson(this);
 }
 
@@ -57,11 +57,12 @@ class ChatMessage {
 
   factory ChatMessage.fromJson(Map<String, dynamic> json) =>
       _$ChatMessageFromJson(json);
-  
+
   Map<String, dynamic> toJson() => _$ChatMessageToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
+@JsonSerializable(
+    explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
 class ChatCompletionUsage {
   ChatCompletionUsage({
     required this.promptTokens,
@@ -75,6 +76,6 @@ class ChatCompletionUsage {
 
   factory ChatCompletionUsage.fromJson(Map<String, dynamic> json) =>
       _$ChatCompletionUsageFromJson(json);
-  
+
   Map<String, dynamic> toJson() => _$ChatCompletionUsageToJson(this);
 }

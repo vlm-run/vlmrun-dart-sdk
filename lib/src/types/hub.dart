@@ -2,7 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'hub.g.dart';
 
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
+@JsonSerializable(
+    explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
 class DomainInfo {
   DomainInfo({
     required this.domain,
@@ -20,7 +21,8 @@ class DomainInfo {
   Map<String, dynamic> toJson() => _$DomainInfoToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
+@JsonSerializable(
+    explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
 class HubInfoResponse {
   HubInfoResponse({
     required this.version,
@@ -34,7 +36,8 @@ class HubInfoResponse {
   Map<String, dynamic> toJson() => _$HubInfoResponseToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
+@JsonSerializable(
+    explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
 class HubSchemaResponse {
   HubSchemaResponse({
     required this.jsonSchema,
@@ -58,7 +61,8 @@ class HubSchemaResponse {
   Map<String, dynamic> toJson() => _$HubSchemaResponseToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
+@JsonSerializable(
+    explicitToJson: true, fieldRename: FieldRename.snake, includeIfNull: false)
 class SchemaResponse {
   SchemaResponse({
     required this.jsonSchema,

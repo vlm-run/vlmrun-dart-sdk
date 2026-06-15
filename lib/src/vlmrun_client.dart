@@ -11,6 +11,9 @@ import 'resources/feedback.dart';
 import 'resources/hub.dart';
 import 'resources/domains.dart';
 import 'resources/artifacts.dart';
+import 'resources/skills.dart';
+import 'resources/datasets.dart';
+import 'resources/fine_tuning.dart';
 
 /// The main client for interacting with the Vlm API.
 class VlmRun {
@@ -72,6 +75,15 @@ class VlmRun {
   /// Access to artifact-related endpoints.
   late final artifacts = ArtifactsResource(this);
 
+  /// Access to skill-related endpoints.
+  late final skills = SkillsResource(this);
+
+  /// Access to dataset-related endpoints.
+  late final datasets = DatasetsResource(this);
+
+  /// Access to fine-tuning-related endpoints.
+  late final fineTuning = FineTuningResource(this);
+
   /// Makes an HTTP request to the Vlm API.
   @internal
   Future<http.Response> request(
@@ -128,11 +140,13 @@ class VlmRun {
     late final http.Response response;
     switch (method) {
       case 'GET':
-        response =
-            await _httpClient.get(uri, headers: headers).timeout(effectiveTimeout);
+        response = await _httpClient
+            .get(uri, headers: headers)
+            .timeout(effectiveTimeout);
         break;
       default:
-        throw ArgumentError('Unsupported HTTP method for bytes request: $method');
+        throw ArgumentError(
+            'Unsupported HTTP method for bytes request: $method');
     }
 
     return response;

@@ -100,6 +100,10 @@ AgentExecutionConfig _$AgentExecutionConfigFromJson(
     AgentExecutionConfig(
       prompt: json['prompt'] as String?,
       jsonSchema: json['json_schema'] as Map<String, dynamic>?,
+      skills: (json['skills'] as List<dynamic>?)
+          ?.map((e) => AgentSkill.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      serviceTier: json['service_tier'] as String?,
     );
 
 Map<String, dynamic> _$AgentExecutionConfigToJson(
@@ -114,6 +118,8 @@ Map<String, dynamic> _$AgentExecutionConfigToJson(
 
   writeNotNull('prompt', instance.prompt);
   writeNotNull('json_schema', instance.jsonSchema);
+  writeNotNull('skills', instance.skills?.map((e) => e.toJson()).toList());
+  writeNotNull('service_tier', instance.serviceTier);
   return val;
 }
 
@@ -121,6 +127,10 @@ AgentCreationConfig _$AgentCreationConfigFromJson(Map<String, dynamic> json) =>
     AgentCreationConfig(
       prompt: json['prompt'] as String?,
       jsonSchema: json['json_schema'] as Map<String, dynamic>?,
+      skills: (json['skills'] as List<dynamic>?)
+          ?.map((e) => AgentSkill.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      serviceTier: json['service_tier'] as String?,
     );
 
 Map<String, dynamic> _$AgentCreationConfigToJson(AgentCreationConfig instance) {
@@ -134,5 +144,7 @@ Map<String, dynamic> _$AgentCreationConfigToJson(AgentCreationConfig instance) {
 
   writeNotNull('prompt', instance.prompt);
   writeNotNull('json_schema', instance.jsonSchema);
+  writeNotNull('skills', instance.skills?.map((e) => e.toJson()).toList());
+  writeNotNull('service_tier', instance.serviceTier);
   return val;
 }

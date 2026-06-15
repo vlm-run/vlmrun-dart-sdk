@@ -10,6 +10,9 @@ CreditUsage _$CreditUsageFromJson(Map<String, dynamic> json) => CreditUsage(
       elementsProcessed: json['elements_processed'] as int?,
       elementType: json['element_type'] as String?,
       creditsUsed: json['credits_used'] as int?,
+      steps: json['steps'] as int?,
+      message: json['message'] as String?,
+      durationSeconds: json['duration_seconds'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$CreditUsageToJson(CreditUsage instance) {
@@ -24,5 +27,8 @@ Map<String, dynamic> _$CreditUsageToJson(CreditUsage instance) {
   writeNotNull('elements_processed', instance.elementsProcessed);
   writeNotNull('element_type', instance.elementType);
   writeNotNull('credits_used', instance.creditsUsed);
+  writeNotNull('steps', instance.steps);
+  writeNotNull('message', instance.message);
+  val['duration_seconds'] = instance.durationSeconds;
   return val;
 }

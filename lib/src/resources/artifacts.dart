@@ -212,7 +212,8 @@ class ArtifactsResource {
       final actualContentType = headers['content-type'];
       if (actualContentType != null &&
           actualContentType != expectedContentType) {
-        throw StateError('Expected $expectedContentType, got $actualContentType');
+        throw StateError(
+            'Expected $expectedContentType, got $actualContentType');
       }
 
       // Build file path with appropriate extension

@@ -7,24 +7,28 @@ class VlmError implements Exception {
   final Map<String, dynamic>? response;
 
   @override
-  String toString() => 'VlmError: $message${code != null ? ' (code: $code)' : ''}';
+  String toString() =>
+      'VlmError: $message${code != null ? ' (code: $code)' : ''}';
 }
 
 /// Error thrown when the API returns a 400 status code.
 class BadRequestError extends VlmError {
-  BadRequestError(String message, {String? code, Map<String, dynamic>? response})
+  BadRequestError(String message,
+      {String? code, Map<String, dynamic>? response})
       : super(message, code: code, response: response);
 }
 
 /// Error thrown when the API returns a 401 status code.
 class AuthenticationError extends VlmError {
-  AuthenticationError(String message, {String? code, Map<String, dynamic>? response})
+  AuthenticationError(String message,
+      {String? code, Map<String, dynamic>? response})
       : super(message, code: code, response: response);
 }
 
 /// Error thrown when the API returns a 403 status code.
 class PermissionError extends VlmError {
-  PermissionError(String message, {String? code, Map<String, dynamic>? response})
+  PermissionError(String message,
+      {String? code, Map<String, dynamic>? response})
       : super(message, code: code, response: response);
 }
 
@@ -42,6 +46,7 @@ class RateLimitError extends VlmError {
 
 /// Error thrown when the API returns a 500 status code.
 class InternalServerError extends VlmError {
-  InternalServerError(String message, {String? code, Map<String, dynamic>? response})
+  InternalServerError(String message,
+      {String? code, Map<String, dynamic>? response})
       : super(message, code: code, response: response);
 }
