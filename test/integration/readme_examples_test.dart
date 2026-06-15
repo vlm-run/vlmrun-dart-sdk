@@ -1,4 +1,5 @@
 @Tags(['integration'])
+@Timeout(Duration(seconds: 120))
 import 'dart:io';
 
 import 'package:test/test.dart';
@@ -14,8 +15,7 @@ import 'package:vlmrun/vlmrun.dart';
 void main() {
   final apiKey = Platform.environment['VLM_API_KEY'];
   final baseUrl = Platform.environment['VLM_BASE_URL'] ?? 'https://api.vlm.run';
-  final agentBaseUrl =
-      Platform.environment['VLM_AGENT_BASE_URL'] ?? 'https://agent.vlm.run';
+  final agentBaseUrl = Platform.environment['VLM_AGENT_BASE_URL'] ?? baseUrl;
 
   // Skip all integration tests if API key is not provided
   final skipReason = apiKey == null || apiKey.isEmpty
@@ -109,12 +109,12 @@ void main() {
     group('OpenAI-Compatible Chat Completions', () {
       test('creates chat completion', () async {
         // README example: OpenAI-Compatible Chat Completions
-        final client = VlmRun(
+        final agentClient = VlmRun(
           bearerToken: apiKey!,
           baseUrl: agentBaseUrl,
           timeout: const Duration(seconds: 120),
         );
-        final response = await client.openai.chat.create(
+        final response = await agentClient.openai.chat.create(
           messages: [
             ChatMessage(
                 role: 'user', content: 'Hello! How can you help me today?'),
