@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import '../../types/openai/chat_completion.dart';
+import '../../utils/http_utils.dart';
 import '../../vlmrun_client.dart';
-import '../../types/error.dart';
 
 /// Resource class for chat completion endpoints.
 class ChatCompletionsResource {
@@ -32,35 +32,8 @@ class ChatCompletionsResource {
 
     final json = jsonDecode(response.body) as Map<String, dynamic>;
 
-    if (response.statusCode != 200) {
-      final responseJson = jsonDecode(response.body) as Map<String, dynamic>;
-      switch (response.statusCode) {
-        case 400:
-          throw BadRequestError(
-            statusCode: response.statusCode,
-            details: responseJson,
-          );
-        case 401:
-          throw AuthenticationError(
-            statusCode: response.statusCode,
-            details: responseJson,
-          );
-        case 404:
-          throw NotFoundError(
-            statusCode: response.statusCode,
-            details: responseJson,
-          );
-        case 429:
-          throw RateLimitError(
-            statusCode: response.statusCode,
-            details: responseJson,
-          );
-        default:
-          throw InternalServerError(
-            statusCode: response.statusCode,
-            details: responseJson,
-          );
-      }
+    if (!HttpUtils.isSuccessful(response.statusCode)) {
+      HttpUtils.handleErrorResponse(response.statusCode, json);
     }
 
     return ChatCompletion.fromJson(json);

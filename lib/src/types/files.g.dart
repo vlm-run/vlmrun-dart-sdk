@@ -35,6 +35,7 @@ FileResponse _$FileResponseFromJson(Map<String, dynamic> json) => FileResponse(
           : DateTime.parse(json['created_at'] as String),
       filename: json['filename'] as String,
       purpose: json['purpose'] as String,
+      publicUrl: json['public_url'] as String?,
     );
 
 Map<String, dynamic> _$FileResponseToJson(FileResponse instance) {
@@ -53,6 +54,7 @@ Map<String, dynamic> _$FileResponseToJson(FileResponse instance) {
   writeNotNull('created_at', instance.createdAt?.toIso8601String());
   val['filename'] = instance.filename;
   val['purpose'] = instance.purpose;
+  writeNotNull('public_url', instance.publicUrl);
   return val;
 }
 

@@ -30,6 +30,8 @@ class PresignedUrlResponse {
     this.uploadMethod,
     this.publicUrl,
     this.createdAt,
+    this.expiration,
+    this.method,
   });
 
   final String? id;
@@ -39,6 +41,8 @@ class PresignedUrlResponse {
   final String? uploadMethod;
   final String? publicUrl;
   final String? createdAt;
+  final int? expiration;
+  final String? method;
 
   factory PresignedUrlResponse.fromJson(Map<String, dynamic> json) =>
       _$PresignedUrlResponseFromJson(json);

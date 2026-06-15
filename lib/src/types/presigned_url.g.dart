@@ -37,6 +37,8 @@ PresignedUrlResponse _$PresignedUrlResponseFromJson(
       uploadMethod: json['upload_method'] as String?,
       publicUrl: json['public_url'] as String?,
       createdAt: json['created_at'] as String?,
+      expiration: json['expiration'] as int?,
+      method: json['method'] as String?,
     );
 
 Map<String, dynamic> _$PresignedUrlResponseToJson(
@@ -56,5 +58,7 @@ Map<String, dynamic> _$PresignedUrlResponseToJson(
   writeNotNull('upload_method', instance.uploadMethod);
   writeNotNull('public_url', instance.publicUrl);
   writeNotNull('created_at', instance.createdAt);
+  writeNotNull('expiration', instance.expiration);
+  writeNotNull('method', instance.method);
   return val;
 }
