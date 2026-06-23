@@ -1,4 +1,4 @@
-.PHONY: help install build test test-integration lint format format-check clean all
+.PHONY: help install build test test-integration lint format format-check clean all analyze-pub
 
 default: help;
 
@@ -17,6 +17,7 @@ help:
 	@echo "  format-check        Check code formatting without modifying files"
 	@echo "  clean               Remove generated and build artifacts"
 	@echo "  all                 Run install, build, lint, format-check, and test"
+	@echo "  analyze-pub         Run pub.dev scoring analysis locally (requires pana)"
 	@echo ""
 
 install: ## Install dependencies
@@ -45,3 +46,6 @@ clean: ## Remove generated and build artifacts
 	rm -rf .dart_tool/
 
 all: install build lint format-check test ## Run full CI pipeline locally
+
+analyze-pub: ## Run pub.dev scoring analysis locally (requires pana)
+	dart pub global run pana .
