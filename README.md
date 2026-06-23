@@ -9,7 +9,7 @@
 <a href="https://pub.dev/packages/vlmrun"><img alt="pub.dev Version" src="https://img.shields.io/pub/v/vlmrun.svg"></a>
 <a href="https://pub.dev/packages/vlmrun"><img alt="pub.dev Likes" src="https://img.shields.io/pub/likes/vlmrun"></a>
 <a href="https://pub.dev/packages/vlmrun"><img alt="pub.dev Points" src="https://img.shields.io/pub/points/vlmrun"></a><br>
-<a href="https://github.com/vlm-run/vlmrun-dart-sdk/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-blue"></a>
+<a href="https://github.com/vlm-run/vlmrun-dart-sdk/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-Apache--2.0-blue"></a>
 <a href="https://discord.gg/AMApC2UzVY"><img alt="Discord" src="https://img.shields.io/badge/discord-chat-purple?color=%235765F2&label=discord&logo=discord"></a>
 <a href="https://twitter.com/vlmrun"><img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/vlmrun.svg?style=social&logo=twitter"></a>
 </p>
@@ -232,4 +232,4 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for deve
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache-2.0 License - see the [LICENSE](LICENSE) file for details.
