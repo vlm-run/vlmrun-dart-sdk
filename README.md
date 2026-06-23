@@ -25,7 +25,7 @@ Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  vlmrun: ^1.0.0
+  vlmrun: ^1.3.3
 ```
 
 Then run:

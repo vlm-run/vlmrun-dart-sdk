@@ -1,6 +1,6 @@
 name: vlmrun
 description: The Vlm Run Dart SDK Dart library provides convenient access to the VLM Run REST API from any Dart application.
-version: 1.3.3
+version: 1.3.4
 repository: https://github.com/vlm-run/vlmrun-dart-sdk
 
 environment:
