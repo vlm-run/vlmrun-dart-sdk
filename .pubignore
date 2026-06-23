@@ -1,0 +1,9 @@
+# Exclude test assets - binary files not needed by package consumers
+test/integration/assets/
+
+# Exclude development files
+.env
+.envrc
+Makefile
+CLAUDE.md
+CONTRIBUTING.md
