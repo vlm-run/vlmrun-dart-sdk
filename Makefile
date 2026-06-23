@@ -1,4 +1,4 @@
-.PHONY: help install build test test-integration lint format format-check clean all analyze-pub
+.PHONY: help install build test test-integration lint format format-check clean all analyze-pub publish-dry-run publish
 
 default: help;
 
@@ -18,6 +18,8 @@ help:
 	@echo "  clean               Remove generated and build artifacts"
 	@echo "  all                 Run install, build, lint, format-check, and test"
 	@echo "  analyze-pub         Run pub.dev scoring analysis locally (requires pana)"
+	@echo "  publish-dry-run     Validate the package without uploading (dart pub publish --dry-run)"
+	@echo "  publish             Publish the package to pub.dev"
 	@echo ""
 
 install: ## Install dependencies
@@ -49,3 +51,9 @@ all: install build lint format-check test ## Run full CI pipeline locally
 
 analyze-pub: ## Run pub.dev scoring analysis locally (requires pana)
 	dart pub global run pana .
+
+publish-dry-run: ## Validate the package without uploading (dart pub publish --dry-run)
+	dart pub publish --dry-run
+
+publish: ## Publish the package to pub.dev
+	dart pub publish

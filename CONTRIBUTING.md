@@ -149,6 +149,56 @@ Then run:
 make analyze-pub
 ```
 
+## Publishing to pub.dev
+
+> Only maintainers with pub.dev publisher access can publish the package.
+
+### Pre-publish checklist
+
+1. Bump the version in `pubspec.yaml`.
+2. Update `CHANGELOG.md` with the release notes for the new version.
+3. Ensure all generated files are up-to-date:
+
+```bash
+dart run build_runner build --delete-conflicting-outputs
+```
+
+4. Run the full CI pipeline locally to confirm everything is green:
+
+```bash
+make all
+```
+
+### Dry run
+
+Validate the package before publishing. This checks for issues without uploading anything:
+
+```bash
+dart pub publish --dry-run
+```
+
+Or via Make:
+
+```bash
+make publish-dry-run
+```
+
+### Publish
+
+Once the dry run is clean and the PR is merged to `main`:
+
+```bash
+dart pub publish
+```
+
+Or via Make:
+
+```bash
+make publish
+```
+
+The command will prompt for confirmation and open a browser window for authentication if needed.
+
 ## Pull Requests
 
 1. Fork the repository
