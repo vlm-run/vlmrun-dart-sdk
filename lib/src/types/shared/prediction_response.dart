@@ -3,6 +3,7 @@ import '../credit_usage.dart';
 
 part 'prediction_response.g.dart';
 
+/// Response from a prediction request.
 @JsonSerializable(explicitToJson: true)
 class PredictionResponse {
   PredictionResponse({

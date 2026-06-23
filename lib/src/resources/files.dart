@@ -88,6 +88,7 @@ class FilesResource {
         .toList();
   }
 
+  /// Retrieve file metadata by ID.
   Future<FileResponse> retrieve(String fileId,
       {bool? generatePublicUrl}) async {
     var path = '/v1/files/$fileId';
