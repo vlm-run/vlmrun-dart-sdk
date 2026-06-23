@@ -27,6 +27,11 @@ jobs:
       - name: Analyze
         run: dart analyze --fatal-infos
 
+      - name: Pub score (pana)
+        run: |
+          dart pub global activate pana
+          dart pub global run pana . --no-warning || true
+
   build:
     name: build
     runs-on: ubuntu-latest
