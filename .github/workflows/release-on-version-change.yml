@@ -1,4 +1,4 @@
-name: Release on Merge
+name: Release on Version Change
 
 on:
   pull_request:
@@ -56,10 +56,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Setup pub.dev credentials
+        if: env.VERSION_CHANGED == 'true'
+        run: dart pub token add https://pub.dev --env-var PUB_TOKEN
+        env:
+          PUB_TOKEN: ${{ secrets.PUB_TOKEN }}
+
       - name: Publish to pub.dev
         if: env.VERSION_CHANGED == 'true'
-        run: |
-          dart pub publish --force
+        run: dart pub publish --force
         env:
           PUB_TOKEN: ${{ secrets.PUB_TOKEN }}
 
