@@ -129,6 +129,26 @@ void main() {
 - Run `dart format .` before committing
 - Run `dart analyze` to check for issues
 
+### pub.dev Scoring Analysis
+
+To check how the package scores on pub.dev locally, run the `pana` analyzer:
+
+```bash
+make analyze-pub
+```
+
+This requires the `pana` tool. If it's not installed, activate it first:
+
+```bash
+dart pub global activate pana
+```
+
+Then run:
+
+```bash
+make analyze-pub
+```
+
 ## Pull Requests
 
 1. Fork the repository
